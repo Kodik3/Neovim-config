@@ -1,0 +1,61 @@
+local options = {
+  number = true,
+  relativenumber = false,
+  signcolumn = 'yes',
+  laststatus = 3,
+  showmode = false,
+  cmdheight = 0,
+  scrolloff = 8,
+  pumheight = 10,
+  showtabline = 2,
+  mouse = 'a',
+  mousefocus = true,
+  expandtab = true,
+  tabstop = 2,
+  softtabstop = 2,
+  shiftwidth = 2,
+  autoindent = true,
+  smartindent = true,
+  smarttab = true,
+  cindent = true,
+  wrap = false,
+  backspace = 'indent,eol,start',
+  fixeol = false,
+  showmatch = true,
+  conceallevel = 2,
+  concealcursor = '',
+  ignorecase = true,
+  smartcase = true,
+  incsearch = true,
+  hlsearch = true,
+  wildignore = '*node_modules/**',
+  completeopt = 'menu,menuone,preview',
+  foldcolumn = '0',
+  foldnestmax = 0,
+  foldlevel = 99,
+  foldlevelstart = 99,
+  swapfile = false,
+  writebackup = false,
+  backup = false,
+  undofile = true,
+  viminfo = "'1000",
+  encoding = 'utf-8',
+  fileencoding = 'utf-8',
+  clipboard = 'unnamed,unnamedplus',
+  errorbells = false,
+  timeoutlen = 200,
+  updatetime = 100,
+  splitright = true,
+  splitbelow = true,
+  emoji = false,
+  colorcolumn = '80',
+}
+
+for k, v in pairs(options) do
+  vim.o[k] = v
+end
+
+-- Глобальные переменные
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ','
+vim.g.speeddating_no_mappings = 1
