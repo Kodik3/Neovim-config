@@ -1,5 +1,5 @@
+-- for all git plugins
 return {
-  -- for all git plugins 
   {
     'tpope/vim-fugitive',
     config = function()
