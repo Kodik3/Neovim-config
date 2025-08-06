@@ -17,10 +17,6 @@ return {
     },
   },
   keys = {
-    -- Плавающее окно (float)
-    -- { '<leader>e', ':Neotree float toggle<CR>', desc = 'Показать/скрыть дерево (float)' },
-    -- { '<leader>o', ':Neotree float git_status<CR>', desc = 'Git статус в дереве (float)' },
-
     { '<leader>e', ':Neotree toggle<CR>', desc = 'Показать/скрыть дерево' },
     { '<leader>o', ':Neotree git_status<CR>', desc = 'Git статус дерева' },
   },

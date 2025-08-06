@@ -3,35 +3,38 @@ local opts = { noremap = true, silent = true }
 
 map({ 'i', 's' }, '<S-Tab>', '<C-d>', { desc = 'Shift-Tab action' })
 
+-- Quit all
+map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit All" })
+
 -- ==============================
 -- Перемещение строки вверх/вниз
 -- ==============================
 -- Нормальный режим
-map('n', '<C-Up>', function()
-  vim.cmd('m .-2')
-  vim.cmd('normal! ==')
-end, opts)
-
-map('n', '<C-Down>', function()
-  vim.cmd('m .+1')
-  vim.cmd('normal! ==')
-end, opts)
-
--- Вставочный режим
-map('i', '<C-Up>', function()
-  vim.cmd('stopinsert')
-  vim.cmd('m .-2')
-  vim.cmd('normal! ==')
-  vim.cmd('startinsert')
-end, opts)
-
-map('i', '<C-Down>', function()
-  vim.cmd('stopinsert')
-  vim.cmd('m .+1')
-  vim.cmd('normal! ==')
-  vim.cmd('startinsert')
-end, opts)
-
+-- map('n', '<C-Up>', function()
+--   vim.cmd('m .-2')
+--   vim.cmd('normal! ==')
+-- end, opts)
+--
+-- map('n', '<C-Down>', function()
+--   vim.cmd('m .+1')
+--   vim.cmd('normal! ==')
+-- end, opts)
+--
+-- -- Вставочный режим
+-- map('i', '<C-Up>', function()
+--   vim.cmd('stopinsert')
+--   vim.cmd('m .-2')
+--   vim.cmd('normal! ==')
+--   vim.cmd('startinsert')
+-- end, opts)
+--
+-- map('i', '<C-Down>', function()
+--   vim.cmd('stopinsert')
+--   vim.cmd('m .+1')
+--   vim.cmd('normal! ==')
+--   vim.cmd('startinsert')
+-- end, opts)
+--
 -- ==============================
 -- Копирование / Вставка
 -- ==============================

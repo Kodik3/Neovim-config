@@ -1,7 +1,6 @@
 local wakatime = require('functions.wakatime')
 
 local COLORS = {
-  bg       = '#202328',
   fg       = '#bbc2cf',
   yellow   = '#ECBE7B',
   cyan     = '#008080',
@@ -80,14 +79,18 @@ return {
             padding = { right = 1 },
           },
           {
-            "branch",
-            icon = "",
-            color = { fg = COLORS.violet, gui = "bold" },
+            'branch',
+            icon = '',
+            color = { fg = COLORS.violet },
           },
-          
+          {
+            'filename',
+            file_status = false,
+            color = { fg = COLORS.magenta }
+          },
           {
             wakatime,
-            cond = function() return vim.g["loaded_wakatime"] == 1 end,
+            cond = function() return vim.g['loaded_wakatime'] == 1 end,
             icon = "󱑆",
             color = { fg = COLORS.cyan },
           },
