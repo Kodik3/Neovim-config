@@ -1,65 +1,64 @@
 return {
+  -- Авто-дополнения с поддержкой LSP ( https://github.com/Saghen/blink.cmp )
   {
-    'hrsh7th/nvim-cmp',
+    'saghen/blink.cmp',
+    enabled = true,
+    lazy = false,
+    build = 'cargo build --release',
     dependencies = {
+      'hrsh7th/nvim-cmp',
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-cmdline',
       'L3MON4D3/LuaSnip',
+      'rafamadriz/friendly-snippets',
+      'Exafunction/windsurf.nvim'
     },
-    config = function()
-      local cmp = require('cmp')
-      cmp.setup({
-        snippet = {
-          expand = function(args)
-            require('luasnip').lsp_expand(args.body)
-          end,
-        },
-        mapping = cmp.mapping.preset.insert({
-          ['<Tab>'] = cmp.mapping.select_next_item(),
-          ['<S-Tab>'] = cmp.mapping.select_prev_item(),
-          ['<CR>'] = cmp.mapping.confirm({ select = true }),
-        }),
-        sources = cmp.config.sources({
-          { name = 'nvim_lsp' },
-          { name = 'buffer' },
-          { name = 'path' },
-        }),
-      })
-    end,
-  },
-
-  {
-    'saghen/blink.cmp',
-    dependencies = { 'rafamadriz/friendly-snippets' },
-    version = '1.*',
-
     opts = {
       keymap = { preset = 'default' },
-      fuzzy = { implementation = "prefer_rust_with_warning" }
+      fuzzy = { implementation = "lua" },
+      cmdline = { enabled = false },
+
+      sources = {
+        default = { 'lsp', 'path', 'snippets', 'buffer', 'codeium' },
+        providers = {
+          codeium = { name = 'Codeium', module = 'codeium.blink', async = true },
+        },
+      },
+
+      completion = {
+        menu = {
+          border = 'rounded',
+          winhighlight = 'Normal:BlinkCmpDoc,FloatBorder:BlinkCmpDocBorder,CursorLine:BlinkCmpDocCursorLine,Search:None',
+        },
+        documentation = {
+          window = {
+            border = 'rounded',
+          },
+          auto_show = true,
+          auto_show_delay_ms = 500
+        },
+      },
     },
   },
-
+  -- Авто-сопряжение ( https://github.com/windwp/nvim-autopairs )
   {
     'windwp/nvim-autopairs',
     event = 'InsertEnter',
     opts = true,
   },
-
+  
+  -- Автоматического закрытие/переименование HTML-тегов
+  -- ( https://github.com/windwp/nvim-ts-autotag )
   {
     'windwp/nvim-ts-autotag',
     event = 'InsertEnter',
     opts = {
-      autotag = {
-        enable = true,
-        enable_close = true,
-        enable_rename = true,
-        enable_close_on_slash = false,
-      }
-    },
-    config = function(_, opts)
-      require("nvim-ts-autotag").setup(opts.autotag)
-    end,
+      enable = true,
+      enable_close = true,
+      enable_rename = true,
+      enable_close_on_slash = false,
+    }
   },
 }
