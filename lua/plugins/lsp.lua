@@ -38,14 +38,21 @@ return {
   {
     'neovim/nvim-lspconfig',
     opts = {
+      diagnostics = { virtual_text = { prefix = "icons" } },
+      capabilities = {
+        workspace = {
+          didChangeWatchedFiles = {
+            dynamicRegistration = false,
+          },
+        },
+      },
       inlay_hints = { enabled = false },
       servers = SERVERS,
     },
     config = function(_, opts)
-      local lspconfig = require("lspconfig")
-
       for server, server_opts in pairs(opts.servers) do
-        lspconfig[server].setup(server_opts)
+        vim.lsp.config(server, server_opts)
+        vim.lsp.enable(server)
       end
     end,
     dependencies = {
