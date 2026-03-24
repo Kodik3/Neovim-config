@@ -4,6 +4,7 @@ M.themes = {
   catppuccin = { 'latte', 'frappe', 'macchiato', 'mocha' },
   tokyonight = { 'storm', 'night', 'moon', 'day' },
   onedark = { 'dark' },
+  vague = {}
 }
 
 -- Установка темы
