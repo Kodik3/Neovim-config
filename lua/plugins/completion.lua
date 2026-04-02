@@ -48,17 +48,18 @@ return {
     event = 'InsertEnter',
     opts = true,
   },
-  
+
   -- Автоматического закрытие/переименование HTML-тегов
   -- ( https://github.com/windwp/nvim-ts-autotag )
   {
     'windwp/nvim-ts-autotag',
     event = 'InsertEnter',
     opts = {
+      filetypes = nil,
       enable = true,
-      enable_close = true,
-      enable_rename = true,
-      enable_close_on_slash = false,
+      close = true,
+      rename = true,
+      close_on_slash = false,
     }
   },
 }
