@@ -7,7 +7,6 @@ local LANGUAGES = {
 return {
   'nvim-treesitter/nvim-treesitter',
   build = ':TSUpdate',
-  main = 'nvim-treesitter.configs',
   opts = {
     auto_install = true,
     ensure_installed = vim.list_extend({
