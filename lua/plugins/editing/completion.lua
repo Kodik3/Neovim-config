@@ -2,19 +2,15 @@ return {
   -- Авто-дополнения с поддержкой LSP ( https://github.com/Saghen/blink.cmp )
   {
     'saghen/blink.cmp',
-    enabled = true,
     lazy = false,
-    build = 'cargo build --release',
+
     dependencies = {
-      'hrsh7th/nvim-cmp',
-      'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-path',
-      'hrsh7th/cmp-cmdline',
-      'L3MON4D3/LuaSnip',
       'rafamadriz/friendly-snippets',
-      'Exafunction/windsurf.nvim'
+      'Exafunction/windsurf.nvim',
     },
+
+    version = '*',
+
     opts = {
       keymap = { preset = 'default' },
       fuzzy = { implementation = "lua" },
@@ -23,7 +19,11 @@ return {
       sources = {
         default = { 'lsp', 'path', 'snippets', 'buffer', 'codeium' },
         providers = {
-          codeium = { name = 'Codeium', module = 'codeium.blink', async = true },
+          codeium = {
+            name = 'Codeium',
+            module = 'codeium.blink',
+            async = true
+          },
         },
       },
 
@@ -37,11 +37,15 @@ return {
             border = 'rounded',
           },
           auto_show = true,
-          auto_show_delay_ms = 500
+          auto_show_delay_ms = 500,
         },
+        ghost_text = {
+          enabled = false,
+        }
       },
     },
   },
+
   -- Авто-сопряжение ( https://github.com/windwp/nvim-autopairs )
   {
     'windwp/nvim-autopairs',
@@ -55,7 +59,6 @@ return {
     'windwp/nvim-ts-autotag',
     event = 'InsertEnter',
     opts = {
-      filetypes = nil,
       enable = true,
       close = true,
       rename = true,

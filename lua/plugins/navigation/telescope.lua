@@ -8,9 +8,9 @@ return {
   },
   keys = {
     { '<leader>ff', '<cmd>Telescope find_files<cr>', desc = 'Поиск файлов' },
-    { '<leader>fg', '<cmd>Telescope live_grep<cr>',  desc = 'Поиск по содержимому' },
-    { '<leader>fb', '<cmd>Telescope buffers<cr>',    desc = 'Поиск буферов' },
-    { '<leader>fh', '<cmd>Telescope help_tags<cr>',  desc = 'Поиск справки' },
+    { '<leader>fg', '<cmd>Telescope live_grep<cr>', desc = 'Поиск по содержимому' },
+    { '<leader>fb', '<cmd>Telescope buffers<cr>', desc = 'Поиск буферов' },
+    { '<leader>fh', '<cmd>Telescope help_tags<cr>', desc = 'Поиск справки' },
   },
   config = function()
     local telescope = require('telescope')

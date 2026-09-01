@@ -1,5 +1,3 @@
-local wakatime = require('functions.wakatime')
-
 local COLORS = {
   fg       = '#bbc2cf',
   yellow   = '#ECBE7B',
@@ -55,7 +53,7 @@ return {
       options = {
         section_separators = '',
         component_separators = '',
-        theme='auto',
+        theme = 'auto',
         disabled_filetypes = {
           'neo-tree',
           'undotree',
@@ -89,12 +87,6 @@ return {
             color = { fg = COLORS.magenta }
           },
           {
-            wakatime,
-            cond = function() return vim.g['loaded_wakatime'] == 1 end,
-            icon = "󱑆",
-            color = { fg = COLORS.cyan },
-          },
-          {
             'diff',
             symbols = { added = '+', modified = '~', removed = '-' },
             diff_color = {
@@ -120,7 +112,7 @@ return {
             -- Lsp server name .
             function()
               local ft = vim.bo.filetype
-              for _, client in ipairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
+              for _, client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
                 if not vim.tbl_contains({ "null-ls", "copilot" }, client.name) then
                   return string.format("%s ( %s)", ft, client.name)
                 end
