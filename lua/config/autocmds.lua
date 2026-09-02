@@ -1,3 +1,4 @@
+-- Подсветка скопированного текста
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
   callback = function()
@@ -5,8 +6,23 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+-- Форматирование файла перед сохранением
 vim.api.nvim_create_autocmd('BufWritePre', {
   callback = function()
     vim.lsp.buf.format({ async = false })
   end,
+})
+
+-- Синхронизация цвета фона терминала с цветом фона Neovim
+vim.api.nvim_create_autocmd({ 'UIEnter', 'ColorScheme' }, {
+  callback = function()
+    local normal = vim.api.nvim_get_hl(0, { name = 'Normal' })
+    if not normal.bg then return end
+    io.write(string.format('\027]11;#%06x\027\\', normal.bg))
+  end,
+})
+
+-- Сброс цвета фона терминала при выходе из Neovim
+vim.api.nvim_create_autocmd('UILeave', {
+  callback = function() io.write('\027]111\027\\') end,
 })
