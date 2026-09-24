@@ -3,7 +3,15 @@ vim.o.foldmethod = 'manual' -- Default fold method (change as needed)
 vim.o.foldlevel = 99        -- Open most folds by default
 vim.o.foldcolumn = '0'
 
-vim.opt.isfname:append("@-@")
+if vim.fn.has('win32') == 1 then
+  vim.o.shell = vim.fn.executable('pwsh') == 1 and 'pwsh' or 'powershell'
+  vim.o.shellcmdflag =
+  [[-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command "$PSStyle.OutputRendering = 'PlainText';]]
+  vim.o.shellquote = ''
+  vim.o.shellxquote = ''
+end
+
+vim.opt.isfname:append('@-@')
 
 local options = {
   nu = true,
@@ -33,7 +41,7 @@ local options = {
   scrolloff = 8,
   signcolumn = 'yes',
 
-  backspace = { "start", "eol", "indent" },
+  backspace = { 'start', 'eol', 'indent' },
   splitright = true,
   splitbelow = true,
 
@@ -57,7 +65,7 @@ local options = {
   wildignore = '*node_modules/**',
   completeopt = 'menu,menuone,noselect',
   writebackup = false,
-  shada = "'1000",
+  shada = '\'1000',
   encoding = 'utf-8',
   fileencoding = 'utf-8',
   clipboard = 'unnamed,unnamedplus',
