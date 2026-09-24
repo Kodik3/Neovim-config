@@ -1,23 +1,40 @@
 return {
   'nvim-neo-tree/neo-tree.nvim',
   version = '*',
+
   dependencies = {
     'nvim-lua/plenary.nvim',
     'MunifTanjim/nui.nvim',
   },
+
   cmd = 'Neotree',
+
   keys = {
-    { '\\', ':Neotree reveal<CR>', desc = 'NeoTree reveal', silent = true },
+    { '\\', '<cmd>Neotree reveal<CR>', desc = 'NeoTree reveal', silent = true },
   },
+
   opts = {
     open_files_do_not_replace_types = { 'trouble', 'qf' },
     close_if_last_window = true,
+
+    event_handlers = {
+      {
+        event = 'file_opened',
+        handler = function()
+          require('neo-tree.command').execute({
+            action = 'close',
+          })
+        end,
+      },
+    },
+
     filesystem = {
       filtered_items = {
         visible = true,
         hide_dot_files = false,
         never_show = { '.git' },
       },
+
       window = {
         position = 'right',
         width = 40,
@@ -26,6 +43,7 @@ return {
         },
       },
     },
+
     source_selector = {
       winbar = true,
     },
