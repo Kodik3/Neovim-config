@@ -16,8 +16,6 @@ map('n', '<C-s>', '<cmd>w<CR>', { desc = 'Сохранить файл' })
 
 -- Tabs
 map('n', 'te', '<cmd>tabedit<CR>', { desc = 'Новая вкладка' })
-map('n', '<Tab>', 'gt', { desc = 'Следующая вкладка' })
-map('n', '<S-Tab>', 'gT', { desc = 'Предыдущая вкладка' })
 
 -- Exit / Quit
 map('n', '<leader>qq', '<cmd>qa<CR>', { desc = 'Выйти из Neovim' })

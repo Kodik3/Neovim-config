@@ -19,6 +19,7 @@ local plugins = {
   { import = 'plugins.ui.colorsheme' },
   { import = 'plugins.ui.highlight-colors' },
   { import = 'plugins.ui.statusline' },
+  { import = 'plugins.ui.bufferline' },
 
   -- Misc
   { import = 'plugins.misc.wakatime' },
