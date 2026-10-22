@@ -25,3 +25,14 @@ map('n', '<left>', '<C-w>h')
 map('n', '<Right>', '<C-w>l')
 map('n', '<Up>', '<C-w>k')
 map('n', '<Down>', '<C-w>j')
+
+-- LSP
+map('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Показать диагностику' })
+
+if vim.lsp.inlay_hint then
+  map('n', '<leader>L', function()
+    local bufnr = vim.api.nvim_get_current_buf()
+    local enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })
+    vim.lsp.inlay_hint.enable(not enabled, { bufnr = bufnr })
+  end, { desc = 'Включить Inlay Hints' })
+end

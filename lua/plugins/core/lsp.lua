@@ -1,9 +1,28 @@
 local SERVERS = {
-  lua_ls = {},
-  rust_analyzer = {},
+  lua_ls = {
+    settings = {
+      Lua = {
+        hint = {
+          enable = true,
+          arrayIndex = 'Disable',
+        },
+      },
+    },
+  },
+  rust_analyzer = {
+    settings = {
+      ['rust-analyzer'] = {
+        inlayHints = {
+          typeHints = { enable = true },
+          parameterHints = { enable = true },
+          chainingHints = { enable = true },
+          closingBraceHints = { enable = true },
+        },
+      },
+    },
+  },
   ts_ls = {},
   cssls = {},
-  tailwindcss = {},
   pyright = {},
 }
 
@@ -13,15 +32,14 @@ return {
     'williamboman/mason.nvim',
     config = true,
     ensure_installed = {
-      "stylua",
-      "prettier",
-      "shfmt",
-      "black",
-      "eslint_d",
-      "luacheck",
-      "pylint",
-      "shellcheck",
-    }
+      'stylua',
+      'prettier',
+      'shfmt',
+      'eslint_d',
+      'luacheck',
+      'shellcheck',
+      'ruff',
+    },
   },
 
   -- Mason-LSPConfig: связывает Mason с nvim-lspconfig
@@ -38,7 +56,7 @@ return {
   {
     'neovim/nvim-lspconfig',
     opts = {
-      diagnostics = { virtual_text = { prefix = "icons" } },
+      diagnostics = { virtual_text = { prefix = 'icons' } },
       capabilities = {
         workspace = {
           didChangeWatchedFiles = {
