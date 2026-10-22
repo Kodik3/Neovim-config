@@ -71,6 +71,7 @@ local options = {
   clipboard = 'unnamed,unnamedplus',
   errorbells = false,
   timeoutlen = 200,
+  emoji = false,
 }
 
 for k, v in pairs(options) do
