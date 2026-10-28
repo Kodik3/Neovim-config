@@ -9,39 +9,53 @@ return {
       'Exafunction/windsurf.nvim',
     },
 
-    version = '*',
+    version = '1.*',
 
     opts = {
       keymap = { preset = 'default' },
-      fuzzy = { implementation = "lua" },
       cmdline = { enabled = false },
 
       sources = {
-        default = { 'lsp', 'path', 'snippets', 'buffer', 'codeium' },
+        default = function()
+          if vim.bo.filetype == '' then
+            return {}
+          end
+
+          local sources = { 'lsp', 'path', 'snippets', 'buffer' }
+
+          local line = vim.api.nvim_get_current_line()
+          local col = vim.api.nvim_win_get_cursor(0)[2]
+          local before_cursor = line:sub(1, col)
+
+          if
+              not line:match('^%s*import%s')
+              and not before_cursor:find('[А-яЁё]')
+          then
+            table.insert(sources, 'codeium')
+          end
+
+          return sources
+        end,
         providers = {
           codeium = {
             name = 'Codeium',
             module = 'codeium.blink',
-            async = true
+            async = true,
           },
         },
       },
 
       completion = {
         menu = {
-          border = 'rounded',
+          scrollbar = false,
           winhighlight = 'Normal:BlinkCmpDoc,FloatBorder:BlinkCmpDocBorder,CursorLine:BlinkCmpDocCursorLine,Search:None',
         },
         documentation = {
-          window = {
-            border = 'rounded',
-          },
-          auto_show = true,
-          auto_show_delay_ms = 500,
+          treesitter_highlighting = false,
         },
         ghost_text = {
           enabled = false,
-        }
+        },
       },
     },
   },
@@ -58,11 +72,19 @@ return {
   {
     'windwp/nvim-ts-autotag',
     event = 'InsertEnter',
-    opts = {
-      enable = true,
-      close = true,
-      rename = true,
-      close_on_slash = false,
-    }
+    config = function()
+      require('nvim-ts-autotag').setup({
+        opts = {
+          enable_close = true,
+          enable_rename = true,
+          enable_close_on_slash = false,
+        },
+        per_filetype = {
+          ['html'] = {
+            enable_close = false,
+          },
+        },
+      })
+    end,
   },
 }
