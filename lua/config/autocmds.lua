@@ -1,20 +1,19 @@
--- Подсветка скопированного текста
 vim.api.nvim_create_autocmd('TextYankPost', {
-  desc = 'Highlight when yanking (copying) text',
+  desc = 'Подсветка скопированного текста',
   callback = function()
     vim.highlight.on_yank()
   end,
 })
 
--- Форматирование файла перед сохранением
 vim.api.nvim_create_autocmd('BufWritePre', {
+  desc = 'Форматирование файла перед сохранением',
   callback = function()
     vim.lsp.buf.format({ async = false })
   end,
 })
 
--- Синхронизация цвета фона терминала с цветом фона Neovim
 vim.api.nvim_create_autocmd({ 'UIEnter', 'ColorScheme' }, {
+  desc = 'Синхронизация цвета фона терминала с цветом фона Neovim',
   callback = function()
     local normal = vim.api.nvim_get_hl(0, { name = 'Normal' })
     if not normal.bg then
@@ -24,25 +23,9 @@ vim.api.nvim_create_autocmd({ 'UIEnter', 'ColorScheme' }, {
   end,
 })
 
--- Сброс цвета фона терминала при выходе из Neovim
 vim.api.nvim_create_autocmd('UILeave', {
+  desc = 'Сброс цвета фона терминала при выходе из Neovim',
   callback = function()
     io.write('\027]111\027\\')
-  end,
-})
-
---- NeoTree ---
--- Закрытие NeoTree при создании новой вкладки
-vim.api.nvim_create_autocmd('TabNewEntered', {
-  callback = function()
-    vim.schedule(function()
-      vim.cmd('tabprevious')
-
-      require('neo-tree.command').execute({
-        action = 'close',
-      })
-
-      vim.cmd('tabnext')
-    end)
   end,
 })
