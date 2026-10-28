@@ -1,14 +1,14 @@
 local COLORS = {
-  fg       = '#bbc2cf',
-  yellow   = '#ECBE7B',
-  cyan     = '#008080',
+  fg = '#bbc2cf',
+  yellow = '#ECBE7B',
+  cyan = '#008080',
   darkblue = '#081633',
-  green    = '#98be65',
-  orange   = '#FF8800',
-  violet   = '#a9a1e1',
-  magenta  = '#c678dd',
-  blue     = '#51afef',
-  red      = '#ec5f67',
+  green = '#98be65',
+  orange = '#FF8800',
+  violet = '#a9a1e1',
+  magenta = '#c678dd',
+  blue = '#51afef',
+  red = '#ec5f67',
 }
 
 local MODE_COLOR_MAP = {
@@ -35,8 +35,12 @@ local MODE_COLOR_MAP = {
 }
 
 local conditions = {
-  buffer_not_empty = function() return vim.fn.empty(vim.fn.expand("%:t")) ~= 1 end,
-  hide_in_width = function() return vim.fn.winwidth(0) > 80 end,
+  buffer_not_empty = function()
+    return vim.fn.empty(vim.fn.expand('%:t')) ~= 1
+  end,
+  hide_in_width = function()
+    return vim.fn.winwidth(0) > 80
+  end,
   check_git_workspace = function()
     local filepath = vim.fn.expand('%:p:h')
     local gitdir = vim.fn.finddir('.git', filepath .. ';')
@@ -49,16 +53,13 @@ return {
   dependencies = { 'nvim-tree/nvim-web-devicons' },
   config = function()
     require('lualine').setup({
-      enabled = true,
       options = {
         section_separators = '',
         component_separators = '',
         theme = 'auto',
         disabled_filetypes = {
           'neo-tree',
-          'undotree',
-          'sagaoutline',
-          'diff',
+          'TelescopePrompt',
         },
       },
       sections = {
@@ -69,7 +70,9 @@ return {
         lualine_c = {
           {
             -- компонент режима
-            function() return '▊' end,
+            function()
+              return '▊'
+            end,
             color = function()
               -- автоматическое изменение цвета в соответствии с режимом neovim
               return { fg = MODE_COLOR_MAP[vim.fn.mode()] }
@@ -84,7 +87,7 @@ return {
           {
             'filename',
             file_status = false,
-            color = { fg = COLORS.magenta }
+            color = { fg = COLORS.magenta },
           },
           {
             'diff',
@@ -113,8 +116,10 @@ return {
             function()
               local ft = vim.bo.filetype
               for _, client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
-                if not vim.tbl_contains({ "null-ls", "copilot" }, client.name) then
-                  return string.format("%s ( %s)", ft, client.name)
+                if
+                  not vim.tbl_contains({ 'null-ls', 'copilot' }, client.name)
+                then
+                  return string.format('%s ( %s)', ft, client.name)
                 end
               end
               return ft
@@ -129,7 +134,7 @@ return {
           },
           {
             'location',
-            padding = { left = -1, right = -5 }
+            padding = { left = -1, right = -5 },
           },
           { 'progress', color = { fg = COLORS.fg } },
         },
@@ -143,5 +148,5 @@ return {
         lualine_x = {},
       },
     })
-  end
+  end,
 }
