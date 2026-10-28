@@ -4,7 +4,6 @@ local plugins = {
   { import = 'plugins.core.treesitter' },
 
   -- Editing
-  { import = 'plugins.editing.comment' },
   { import = 'plugins.editing.completion' },
   { import = 'plugins.editing.conform' },
   { import = 'plugins.editing.git' },
