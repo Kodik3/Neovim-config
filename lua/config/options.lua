@@ -1,15 +1,4 @@
-vim.o.foldenable = true     -- Enable folding by default
-vim.o.foldmethod = 'manual' -- Default fold method (change as needed)
-vim.o.foldlevel = 99        -- Open most folds by default
-vim.o.foldcolumn = '0'
-
-if vim.fn.has('win32') == 1 then
-  vim.o.shell = vim.fn.executable('pwsh') == 1 and 'pwsh' or 'powershell'
-  vim.o.shellcmdflag =
-  [[-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command "$PSStyle.OutputRendering = 'PlainText';]]
-  vim.o.shellquote = ''
-  vim.o.shellxquote = ''
-end
+vim.o.guicursor = 'n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,t:block-TermCursor'
 
 vim.opt.isfname:append('@-@')
 
@@ -51,6 +40,10 @@ local options = {
 
   mouse = 'a',
   mousefocus = true,
+
+  foldmethod = 'expr',
+  foldexpr = 'v:lua.vim.treesitter.foldexpr()',
+  foldlevel = 99,
 
   laststatus = 3,
   showmode = false,

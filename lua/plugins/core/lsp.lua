@@ -24,25 +24,12 @@ local SERVERS = {
   ts_ls = {},
   cssls = {},
   pyright = {},
+  ruff = {},
 }
 
 return {
-  -- Mason: менеджер LSP серверов
-  {
-    'williamboman/mason.nvim',
-    config = true,
-    ensure_installed = {
-      'stylua',
-      'prettier',
-      'shfmt',
-      'eslint_d',
-      'luacheck',
-      'shellcheck',
-      'ruff',
-    },
-  },
+  { 'williamboman/mason.nvim', config = true },
 
-  -- Mason-LSPConfig: связывает Mason с nvim-lspconfig
   {
     'williamboman/mason-lspconfig.nvim',
     config = true,
@@ -52,7 +39,6 @@ return {
     },
   },
 
-  -- LSP Config: настройка самих серверов
   {
     'neovim/nvim-lspconfig',
     opts = {
@@ -64,15 +50,17 @@ return {
           },
         },
       },
+
       inlay_hints = { enabled = false },
-      servers = SERVERS,
     },
-    config = function(_, opts)
-      for server, server_opts in pairs(opts.servers) do
+
+    config = function()
+      for server, server_opts in pairs(SERVERS) do
         vim.lsp.config(server, server_opts)
         vim.lsp.enable(server)
       end
     end,
+
     dependencies = {
       {
         'folke/lazydev.nvim',
