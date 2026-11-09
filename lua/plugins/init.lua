@@ -8,7 +8,6 @@ local plugins = {
   { import = 'plugins.editing.conform' },
   { import = 'plugins.editing.git' },
   { import = 'plugins.editing.lint' },
-  { import = 'plugins.editing.windsurf' },
 
   -- Navigation
   { import = 'plugins.navigation.telescope' },

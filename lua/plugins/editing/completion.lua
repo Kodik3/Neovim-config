@@ -3,48 +3,16 @@ return {
   {
     'saghen/blink.cmp',
     lazy = false,
-
-    dependencies = {
-      'rafamadriz/friendly-snippets',
-      'Exafunction/windsurf.nvim',
-    },
-
     version = '1.*',
+
+    dependencies = { 'rafamadriz/friendly-snippets' },
 
     opts = {
       keymap = { preset = 'default' },
       cmdline = { enabled = false },
-
       sources = {
-        default = function()
-          if vim.bo.filetype == '' then
-            return {}
-          end
-
-          local sources = { 'lsp', 'path', 'snippets', 'buffer' }
-
-          local line = vim.api.nvim_get_current_line()
-          local col = vim.api.nvim_win_get_cursor(0)[2]
-          local before_cursor = line:sub(1, col)
-
-          if
-              not line:match('^%s*import%s')
-              and not before_cursor:find('[А-яЁё]')
-          then
-            table.insert(sources, 'codeium')
-          end
-
-          return sources
-        end,
-        providers = {
-          codeium = {
-            name = 'Codeium',
-            module = 'codeium.blink',
-            async = true,
-          },
-        },
+        default = { 'lsp', 'path', 'snippets', 'buffer' },
       },
-
       completion = {
         menu = {
           scrollbar = false,
